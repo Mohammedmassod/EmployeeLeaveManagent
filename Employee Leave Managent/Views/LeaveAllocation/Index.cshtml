@@ -1,0 +1,42 @@
+﻿@model Employee_Leave_Managent.Models.CreateLeaveAllocationVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align:center">
+<h1>الرئيسية</h1>
+
+<p>
+   <hr/>
+    </div>
+@*    <a asp-action="Create">اضافة جديد</a>
+*@</p>
+        <table id="tdtable" class="table table-bordered" style="text-align:center">
+    <thead>
+        <tr>
+            <th style="text-align:center">
+                انواع الإجازات
+            </th>
+                    <th style="text-align:center">
+                الأجراءات
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LeaveTypes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>            
+            <td>
+                @Html.ActionLink("تخصيص لكل الموظفين","SetLeave", new { id = item.Id }, new {@class = "btn btn-success"})
+                <a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
+                    <i class="fa fa-pencil"></i> تخصيص لموظف معين
+                </a>
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

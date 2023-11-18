@@ -1,0 +1,39 @@
+﻿@model Employee_Leave_Managent.Models.LeaveTypeVM
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align:center">
+
+<h1>تفاصيل نوع الإجازة</h1>
+</div>
+    <hr />
+    <div style="position:center;margin-right:400px">
+
+        <div class="row" style="text-align:center">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DefaultDays)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DefaultDays)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+    </dl>
+</div>
+</div>
+<div class="form-group" style="position:inherit; margin-right:110px; margin-left:450px;">
+    <a class="btn btn-secondary btn" asp-action="Edit" asp-route-id="@Model.Id">تعديل</a> |
+    <a class="btn btn-warning btn"  asp-action="Index">رجوع</a>
+</div>

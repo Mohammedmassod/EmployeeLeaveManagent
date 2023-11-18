@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Employee_Leave_Managent.Models.LeaveTypeVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div style="text-align:center">
+<h1>انوع الإجازات</h1>
+<hr />
+</div>
+<p>
+    <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> اضافة جديد</a>
+</p>
+<table id="tblData" class="table-bordered " style="text-align:center">
+    <thead style="text-align:center">
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.DefaultDays)
+            </th>
+            <th style="text-align:center">إجراءات</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultDays)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id">
+                <i class="fa fa-pencil" aria-hidden="true"></i></a> 
+                -
+                <a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id">
+                <i class="fa fa-info-circle" aria-hidden="true"></i></a> 
+                -
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this record?')">
+                <i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,100 @@
+﻿@model EmployeeLeaveRequestViewVM
+
+@{
+    ViewData["Title"] = "MyLeave";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center">
+    <h1>  سجل إجازاتي    </h1>
+    <hr />
+</div>
+<table id="tblData" class="table-bordered" style="text-align:center">
+    <thead>
+        <tr>
+            <th style="text-align:center">
+                نوع الإجازة
+            </th>
+            <th style="text-align:center">
+                من تاريخ
+            </th>
+            <th style="text-align:center">
+                الى تاريخ
+            </th>
+            <th style="text-align:center">
+                تاريخ الطلب
+            </th>
+            <th style="text-align:center">
+                حالة الموافقة
+            </th>
+            <th style="text-align:center">
+                التراجع عن الطلب
+            </th>           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.LeaveRequests) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateRequested, new { @value = item.DateRequested.ToString("yyyy-mm-dd")})
+            </td>
+            <td>
+                @if (item.Cancelled)
+                {
+                    <span class="badge badge-secondary">ألغيت</span>
+                }
+                else if (item.Approved == true)
+                {
+                    <span class="badge badge-success">مقبولة</span>
+                }
+                else if (item.Approved == false)
+                {
+                    <span class="badge badge-danger">مرفوضة</span>
+                }
+                else
+                {
+                    <span class="badge badge-warning">قيد الانتظار</span>
+                }
+            </td>
+            <td>
+                @if ((!item.Cancelled && item.StartDate > DateTime.Now && item.Approved == null))
+                {
+                    <a asp-action="CancelRequest" class="btn btn-danger" asp-route-id="@item.Id" onclick="return confirm('هل انت متاكد ان تريد التراجع عن الطلب ')">
+                       <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                }
+            </td>           
+        </tr>
+}
+    </tbody>
+</table>
+<hr />
+<div style="text-align:center">
+    <h1>  رصيدي من الإجازات   </h1>
+    <hr />
+</div>
+<div class="jumbotron">
+    <div class="row">
+        @foreach (var item in Model.LeaveAllocations)
+        {
+            <div class="col-sm-2">
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <h6 class="card-title">@item.LeaveType.Name</h6>
+                        <p class="card-text">عدد الأيام: @item.NumberOfDays</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

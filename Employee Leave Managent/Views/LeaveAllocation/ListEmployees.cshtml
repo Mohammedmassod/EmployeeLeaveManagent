@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Employee_Leave_Managent.Models.EmployeeVM>
+
+@{
+    ViewData["Title"] = "ListEmployees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align:center">
+<h1>قائمة الموظفين</h1>
+    <p>
+        @*Employee Leave Managent\Areas\Identity\Pages\Account\Login.cshtml...        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">تسجيل</a>
+        *@
+        <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">
+            <i class="fa fa-plus"></i> إضافة موظف جديد
+        </a>
+    </p>
+</div>
+<table id="tblData" class="table-bordered" style="text-align:center">
+    <thead>
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th style="text-align:center"> الإجراءت</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>            
+            <td>
+                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.Id">
+                    <i class="fa fa-search"></i> التفاصيل
+                </a>
+                <a class="btn btn-outline-danger" asp-action="" asp-route-id="">
+                    <i class="fa fa-remove"></i> حذف
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
