@@ -52,6 +52,7 @@ namespace Employee_Leave_Managent
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [Obsolete]
         public void Configure(
             IApplicationBuilder app, 
             IWebHostEnvironment env,
@@ -78,7 +79,7 @@ namespace Employee_Leave_Managent
             app.UseAuthentication();
             app.UseAuthorization();
 
-            SeedData.Seed(userManager, roleManager);
+           // SeedData.Seed(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {

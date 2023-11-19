@@ -4,27 +4,33 @@ using Employee_Leave_Managent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Employee_Leave_Managent.Data.Migrations
+#nullable disable
+
+namespace Employee_Leave_Managent.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119012008_new1")]
+    partial class new1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.16")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.18")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Employee_Leave_Managent.Data.LeaveAllocation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -54,8 +60,9 @@ namespace Employee_Leave_Managent.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool?>("Approved")
                         .HasColumnType("bit");
@@ -102,8 +109,9 @@ namespace Employee_Leave_Managent.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -119,111 +127,6 @@ namespace Employee_Leave_Managent.Data.Migrations
                     b.ToTable("LeaveTypes");
                 });
 
-            modelBuilder.Entity("Employee_Leave_Managent.Models.EmployeeVM", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("DateJoined")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Firstname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaxId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmployeeVM");
-                });
-
-            modelBuilder.Entity("Employee_Leave_Managent.Models.LeaveRequestVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool?>("Approved")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ApprovedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Cancelled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DateActioned")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateRequested")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LeaveTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RequestComments")
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
-
-                    b.Property<string>("RequestingEmployeeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApprovedById");
-
-                    b.HasIndex("LeaveTypeId");
-
-                    b.HasIndex("RequestingEmployeeId");
-
-                    b.ToTable("LeaveRequestVM");
-                });
-
-            modelBuilder.Entity("Employee_Leave_Managent.Models.LeaveTypeVM", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DefaultDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LeaveTypeVM");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -234,29 +137,46 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e420ab41-8204-4604-a5bd-ca77e88def9c",
+                            ConcurrencyStamp = "26a91d54-2829-4f71-b800-e2eb24557ecc",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "2d5ef183-2290-4248-8b9c-b2b3486fa99b",
+                            ConcurrencyStamp = "18ae14f7-42ca-428c-a2df-0684603c3c21",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -272,7 +192,7 @@ namespace Employee_Leave_Managent.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -292,8 +212,8 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -305,12 +225,12 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -328,20 +248,20 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
@@ -350,8 +270,9 @@ namespace Employee_Leave_Managent.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -367,18 +288,18 @@ namespace Employee_Leave_Managent.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -391,7 +312,7 @@ namespace Employee_Leave_Managent.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -406,7 +327,14 @@ namespace Employee_Leave_Managent.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "4a2e1650-21bd-4e67-832e-2e99c267a2e4",
+                            RoleId = "e420ab41-8204-4604-a5bd-ca77e88def9c"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -415,19 +343,19 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Employee_Leave_Managent.Data.Migrations.Employee", b =>
@@ -450,6 +378,29 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Employee");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "4a2e1650-21bd-4e67-832e-2e99c267a2e4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e142a13f-a5a5-47c5-904e-285b71515feb",
+                            Email = "admin@mohammed.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@MOHAMMED.COM",
+                            NormalizedUserName = "ADMIN@MOHAMMED.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMan1H5pyAgjzGJe9qzXXm91j5ekKWM4EbiIaBdnibcdJoQX9Be0MkC+OqJDS8Aqvw==",
+                            PhoneNumber = "778877887",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "10c69fce-935f-4235-b1d9-e69df0e0b6ce",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@mohammed.com",
+                            DateJoined = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Firstname = "mohammed",
+                            Lastname = "massowd"
+                        });
                 });
 
             modelBuilder.Entity("Employee_Leave_Managent.Data.LeaveAllocation", b =>
@@ -463,6 +414,10 @@ namespace Employee_Leave_Managent.Data.Migrations
                         .HasForeignKey("LeaveTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("LeaveType");
                 });
 
             modelBuilder.Entity("Employee_Leave_Managent.Data.LeaveRequest", b =>
@@ -480,23 +435,12 @@ namespace Employee_Leave_Managent.Data.Migrations
                     b.HasOne("Employee_Leave_Managent.Data.Migrations.Employee", "RequestingEmployee")
                         .WithMany()
                         .HasForeignKey("RequestingEmployeeId");
-                });
 
-            modelBuilder.Entity("Employee_Leave_Managent.Models.LeaveRequestVM", b =>
-                {
-                    b.HasOne("Employee_Leave_Managent.Models.EmployeeVM", "ApprovedBy")
-                        .WithMany()
-                        .HasForeignKey("ApprovedById");
+                    b.Navigation("ApprovedBy");
 
-                    b.HasOne("Employee_Leave_Managent.Models.LeaveTypeVM", "LeaveType")
-                        .WithMany()
-                        .HasForeignKey("LeaveTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("LeaveType");
 
-                    b.HasOne("Employee_Leave_Managent.Models.EmployeeVM", "RequestingEmployee")
-                        .WithMany()
-                        .HasForeignKey("RequestingEmployeeId");
+                    b.Navigation("RequestingEmployee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
