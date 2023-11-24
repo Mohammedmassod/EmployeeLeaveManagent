@@ -7,6 +7,8 @@ using System.Text;
 using Employee_Leave_Managent.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
+using System.Reflection.Emit;
+
 namespace Employee_Leave_Managent.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -31,13 +33,13 @@ namespace Employee_Leave_Managent.Data
                 NormalizedUserName = "ADMIN@MOHAMMED.COM",
                 NormalizedEmail = "ADMIN@MOHAMMED.COM",
             });
-            builder.Entity<IdentityRole>().HasData(new IdentityRole()
+            builder.Entity<Roles>().HasData(new Roles()
             {
                 Id = "e420ab41-8204-4604-a5bd-ca77e88def9c",
                 Name = "Administrator",
                 NormalizedName = "ADMINISTRATOR"
 
-            }, new IdentityRole()
+            }, new Roles()
             {
                 Id = "2d5ef183-2290-4248-8b9c-b2b3486fa99b",
                 Name = "Employee",
@@ -50,14 +52,21 @@ namespace Employee_Leave_Managent.Data
             });
 
 
-          base.OnModelCreating(builder);
+            
+
+
+            base.OnModelCreating(builder);
+            // إضافة كيان "Roles" إلى النموذج
+            
         }
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveRequest> LeaveRequests { get; set; }
-        
+        public DbSet<Roles> Role { get; set; }
+
+
 
     }
 }

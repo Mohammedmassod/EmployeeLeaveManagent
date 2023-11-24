@@ -1,4 +1,5 @@
 using AutoMapper;
+//using Employee_Leave_Managent.Areas.Identity.Pages.Account.Manage;
 using Employee_Leave_Managent.Contracts;
 using Employee_Leave_Managent.Data;
 using Employee_Leave_Managent.Data.Migrations;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,16 +42,17 @@ namespace Employee_Leave_Managent
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
-
             services.AddAutoMapper(typeof(Maps));
-            
-            services.AddDefaultIdentity<Employee>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //services.AddTransient<IEmailSender, IEmailSender>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-        }
+            services.AddIdentity<Employee, Roles>()
+        .AddRoleManager<RoleManager<Roles>>()
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+         .AddDefaultUI()
+        .AddDefaultTokenProviders();        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         [Obsolete]
@@ -57,8 +60,9 @@ namespace Employee_Leave_Managent
             IApplicationBuilder app, 
             IWebHostEnvironment env,
             UserManager<Employee> userManager,
-            RoleManager<IdentityRole> roleManager
+            RoleManager<Roles> roleManager
         )
+
         {
             if (env.IsDevelopment())
             {

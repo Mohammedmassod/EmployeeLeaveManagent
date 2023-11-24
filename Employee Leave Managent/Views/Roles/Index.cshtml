@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Index</h1>
+
+@model List<Employee_Leave_Managent.Data.Roles>
+
+<div class="container">
+    <h2 class="text-center">Roles</h2>
+
+    <p class="text-center">
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

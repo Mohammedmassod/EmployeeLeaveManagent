@@ -31,7 +31,7 @@
 @foreach (var item in Model.LeaveTypes) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                     @Html.DisplayFor(modelItem => item.Name)
             </td>            
             <td>
                 @Html.ActionLink("تخصيص لكل الموظفين","SetLeave", new { id = item.Id }, new {@class = "btn btn-success"})
@@ -60,7 +60,7 @@
             event.preventDefault();
             var employeeId = $('#employee-id').val(); // جلب قيمة حقل النص
             $.ajax({
-                url: '@Url.Action("SetLeave", "ControllerName")', // استبدال ControllerName بالاسم الحقيقي للتحكم
+                url: '@Url.Action("SetLeave", "LeaveAllocation")', // استبدال ControllerName بالاسم الحقيقي للتحكم
                 data: { id: employeeId }, // تمرير معرّف الموظف كمعلمة
                 type: 'POST', // نوع الطلب
                 success: function(response) {
