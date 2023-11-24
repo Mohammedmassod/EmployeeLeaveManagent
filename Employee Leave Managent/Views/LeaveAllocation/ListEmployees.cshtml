@@ -31,28 +31,25 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Firstname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lastname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.Id">
-                        <i class="fa fa-search"></i> التفاصيل
-                    </a>
-                    <a class="btn btn-outline-danger" asp-action="" asp-route-id="">
-                        <i class="fa fa-remove"></i> حذف
-                    </a>
-                    <a class="btn btn-outline-primary" asp-action="AddPermission" asp-route-id="@item.Id">
-                        <i class="fa fa-plus"></i> إضافة صلاحية
-                    </a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>            
+            <td>
+                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.Id">
+                    <i class="fa fa-search"></i> التفاصيل
+                </a>
+                <a class="btn btn-outline-danger" asp-action="" asp-route-id="">
+                    <i class="fa fa-remove"></i> حذف
+                </a>
+            </td>
+        </tr>
 }
     </tbody>
 </table>

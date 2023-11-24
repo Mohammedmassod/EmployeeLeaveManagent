@@ -75,26 +75,13 @@ namespace Employee_Leave_Managent.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        /*public ActionResult ListEmployees()
+        public ActionResult ListEmployees()
         {
             var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
             var model = _mapper.Map<List<EmployeeVM>>(employees);
             return View(model);
-        }*/
-        public ActionResult ListEmployees()
-{
-    var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
-    var currentUser = _userManager.GetUserAsync(User).Result;
+        }
 
-    // إضافة الموظف الحالي إلى القائمة إذا لم يتم عرضه بالفعل
-    if (!employees.Contains(currentUser))
-    {
-        employees.Add(currentUser);
-    }
-
-    var model = _mapper.Map<List<EmployeeVM>>(employees);
-    return View(model);
-}
         // GET: LeaveAllocationController/Details/5
         public ActionResult Details(string id)
         {
