@@ -1,6 +1,6 @@
 using AutoMapper;
 //using Employee_Leave_Managent.Areas.Identity.Pages.Account.Manage;
-using Employee_Leave_Managent.Contracts;
+using Employee_Leave_Managent.Interfaces;
 using Employee_Leave_Managent.Data;
 using Employee_Leave_Managent.Data.Migrations;
 using Employee_Leave_Managent.Mappings;

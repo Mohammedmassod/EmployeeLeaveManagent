@@ -72,7 +72,7 @@ namespace Employee_Leave_Managent.Controllers
             return View(employee);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         public IActionResult DeleteConfirmed(string id)
         {
             Employee employee = _context.Employees.Find(id);

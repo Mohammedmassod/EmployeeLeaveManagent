@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Employee_Leave_Managent.Contracts
+namespace Employee_Leave_Managent.Interfaces
 {
     public interface ILeaveRequestRepository : IRepositoryBase<LeaveRequest>
     {
