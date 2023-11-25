@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Employee_Leave_Managent.Models.CustomValidation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,10 +14,12 @@ namespace Employee_Leave_Managent.Models
         [Display(Name = " طلب موظف ")]
         public EmployeeVM RequestingEmployee { get; set; }
         [Display (Name = "اسم الموظف ")]
+
         public string RequestingEmployeeId { get; set; }
         [Display(Name = " من تاريخ")]
         [Required]
         [DataType(DataType.Date)]
+        //[CustomDateValidation(ErrorMessage = "يجب أن يكون التاريخ أقل من تاريخ اليوم بيوم واحد على الأقل.")]
         public DateTime StartDate { get; set; }
         [Display(Name = "الى تاريخ")]
         [Required]
@@ -64,6 +67,9 @@ namespace Employee_Leave_Managent.Models
         public IEnumerable<SelectListItem> LeaveTypes { get; set; }
         [Display(Name ="نوع الاجازة")]
         public int LeaveTypeId { get; set; }
+       /*// public IEnumerable<SelectListItem> Employees { get; set; }
+        [Display(Name = "للموظف : ")]
+        public string EmployeeId { get; set; }*/
         [Display(Name = "تعليق الموظف")]
         [MaxLength(300)]
         public string RequestComments { get; set; }

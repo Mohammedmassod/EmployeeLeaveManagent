@@ -151,6 +151,7 @@ namespace Employee_Leave_Managent.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateLeaveRequestVM model)
         {
+            
             try
             {
                 var startDate = Convert.ToDateTime(model.StartDate);
@@ -167,12 +168,8 @@ namespace Employee_Leave_Managent.Controllers
                     return View(model);
                 }
 
-                if (DateTime.Compare(startDate, endDate) > 1)
-                {
-                    ModelState.AddModelError("", "لا يمكن أن يكون تاريخ البدء أكبر من تاريخ الانتهاء");
-                    return View(model);
-                }
-
+                
+              
                 var employee = _userManager.GetUserAsync(User).Result;
                 var allocation = _leaveAllocRepo.GetLeaveAllocationsByEmployeeAndType(employee.Id, model.LeaveTypeId);
                 int daysRequested = (int)(endDate - startDate).TotalDays;

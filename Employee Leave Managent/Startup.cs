@@ -43,6 +43,7 @@ namespace Employee_Leave_Managent
             services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
             services.AddAutoMapper(typeof(Maps));
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             //services.AddTransient<IEmailSender, IEmailSender>();
 
