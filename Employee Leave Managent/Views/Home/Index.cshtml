@@ -1,14 +1,26 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using Employee_Leave_Managent.Data.Migrations
+@inject SignInManager<Employee> SignInManager
+@inject UserManager<Employee> UserManager
+
+
+@{
     ViewData["Title"] = "الصفحة الرئيسية";
 }
 
 <div class="text-center">
     <div class="showing" style=" color:blueviolet ;border:hidden;background-color:ghostwhite; padding-block:15px"  >
-        
+  
     <h1 class="display-4">مرحبا بكم في</h1>
     <hr/>
         <h1> نظام إدارة الإجازات LMS</h1>
     </div>
-     
+       @if (!SignInManager.IsSignedIn(User))
+  {  
      <h5> اضغط على تسجيل الدخول لتتمكن من استخدام النظام</h5>
+  }
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h5> نرجوا ان ينال إعجابكم</h5>
+    }
 </div>

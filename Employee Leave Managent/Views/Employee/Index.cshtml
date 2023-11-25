@@ -36,7 +36,10 @@
                     <td>
                         <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@employee.Id">تعديل</a>
                         <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@employee.Id">حذف</a>
-                        <a class="btn btn-sm btn-success" asp-area="Identity" asp-page="/Account/Register" asp-route-id="@employee.Id">تفعيل حساب للموظف</a>
+                        @if (!string.IsNullOrEmpty(employee.NormalizedEmail))
+                        {
+                            <a class="btn btn-sm btn-success" asp-area="Identity" asp-page="/Account/Register" asp-route-id="@employee.Id">تفعيل حساب للموظف</a>
+                        }
                     </td>
                 </tr>
             }
