@@ -42,3 +42,8 @@ This system has the following features.
 - microsoft.entityframeworkcore.sqlserver
 - microsoft.entityframeworkcore.tools
 - microsoft.visualstudio.web.codegeneration.design
+
+## Future development plan
+
+- Adding departments, so that each employee can obtain permission from his department manager
+- Adding more powers and types of users, for example, powers for the Human Resources Manager, and powers for the General Manager.
