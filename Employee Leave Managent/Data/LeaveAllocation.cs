@@ -12,14 +12,19 @@ namespace Employee_Leave_Managent.Data
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "عدد الايام ")]
         public int NumberOfDays { get; set; }
+        [Display(Name = "تاريخ الإنشاء ")]
         public DateTime DateCreated { get; set; }
         [ForeignKey("EmployeeId")]
         public Employee Employee { get; set; }
+        [Display(Name = "رقم الموظف ")]
         public string EmployeeId { get; set; }
         [ForeignKey("LeaveTypeId")]
         public LeaveType LeaveType { get; set; }
+        [Display(Name = "رقم نوع الاجازة")]
         public int LeaveTypeId { get; set; }
+        [Display(Name = " فترة ")]
         public int Period { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Employee_Leave_Managent.Controllers
 {
@@ -22,6 +23,8 @@ namespace Employee_Leave_Managent.Controllers
         private readonly ILeaveAllocationRepository _leaveAllocationRepo;
         private readonly IMapper _mapper;
         private readonly UserManager<Employee> _userManager;
+        private readonly ApplicationDbContext _context;
+
 
         public LeaveAllocationController(
             ILeaveTypeRepository leaveRepo,
@@ -47,6 +50,26 @@ namespace Employee_Leave_Managent.Controllers
                 NumberUpdated = 0
             };
             return View(model);
+        }
+        // عرض نموذج الإضافة
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // إنشاء الاحتياط الجديد
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(LeaveAllocation leaveAllocation)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.LeaveAllocations.Add(leaveAllocation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(leaveAllocation);
         }
 
         public ActionResult SetLeave(int id)
@@ -112,7 +135,7 @@ namespace Employee_Leave_Managent.Controllers
         }   
 
         // GET: LeaveAllocationController/Create
-        public ActionResult Create()
+       /* public ActionResult Create()
         {
             return View();
         }
@@ -130,7 +153,7 @@ namespace Employee_Leave_Managent.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: LeaveAllocationController/Edit/5
         public ActionResult Edit(int id)

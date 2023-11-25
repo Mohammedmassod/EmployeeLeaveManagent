@@ -75,3 +75,85 @@
         });
     });
 </script>
+@**@
+@*//@model Employee_Leave_Managent.Models.CreateLeaveAllocationVM*@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div style="text-align:center">
+    <h1>تخصيص الاجازات </h1>
+    </div>
+    <p>
+        <a asp-action="Create">اضافة جديد</a>
+    </p>
+
+    <table id="tblData" class="table table-bordered" style="text-align:center">
+        <thead >
+            <tr >
+                <th style="text-align:center">
+                    انواع الإجازات
+                </th>
+                <th style="text-align:center">
+                    الأجراءات
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LeaveTypes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("تخصيص لكل الموظفين","SetLeave", new { id = item.Id }, new {@class = "btn btn-success"})
+                        <a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
+                            <i class="fa fa-pencil"></i> تخصيص لموظف معين
+                        </a>
+                    </td>
+                    <td>
+                        <label for="employee-id-@item.Id">معرّف الموظف: </label>
+                        <select id="employee-id-@(item.Id)" name="employee-id-@(item.Id)">
+                            <option value="">اختر موظفًا</option>
+                           @* @foreach (var employee in Model.Employees)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }*@
+                        </select>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<script>
+    $(document).ready(function () {
+        // استدعاء الإجراء SetLeave عند النقر على الزر "تخصيص لموظف معين"
+        $('a.btn-outline-success').click(function (event) {
+            event.preventDefault();
+            var employeeId = $('#employee-id').val(); // جلب قيمة حقل النص
+            $.ajax({
+                url: '@Url.Action("SetLeave", "LeaveAllocation")', // استبدال ControllerName بالاسم الحقيقي للتحكم
+                data: { id: employeeId }, // تمرير معرّف الموظف كمعلمة
+                type: 'POST', // نوع الطلب
+                success: function (response) {
+                    // تنفيذ أي إجراءات إضافية بعد الانتهاء بنجاح
+                    console.log(response);
+                },
+                error: function () {
+                    // تنفيذ أي إجراءات إضافية في حالة وجود خطأ
+                    console.log('حدث خطأ');
+                }
+            });
+        });
+    });
+</script>
