@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace Employee_Leave_Managent.Controllers
 {
@@ -72,7 +73,7 @@ namespace Employee_Leave_Managent.Controllers
             return View(leaveAllocation);
         }
 
-        public ActionResult SetLeave(int id)
+        /*public ActionResult SetLeave(int id)
         {
             var leaveType = _leaveRepo.FindById(id);
             var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
@@ -96,6 +97,49 @@ namespace Employee_Leave_Managent.Controllers
                 _leaveAllocationRepo.Create(leaveallocation);
             }
             return RedirectToAction(nameof(Index));
+        }*/
+        public ActionResult SetLeave(int id)
+        {
+            var leaveType = _leaveRepo.FindById(id);
+            var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
+            var loggedInEmployeeId = User.FindFirstValue(ClaimTypes.NameIdentifier); // أو أي طريقة أخرى للحصول على معرف الموظف المسجل الدخول
+
+            foreach (var emp in employees)
+            {
+                if (_leaveAllocationRepo.CheckAllocation(id, emp.Id))
+                {
+                    ModelState.AddModelError("", $"تم تخصيص إجازة {leaveType.Name} للموظف {emp.Firstname} {emp.Lastname} مسبقاً.");
+                    continue;
+                }
+
+                if (emp.Id == loggedInEmployeeId)
+                {
+                    // تخصيص الإجازة أيضًا للموظف المسجل الدخول
+                    var loggedInAllocation = new LeaveAllocationVM
+                    {
+                        DateCreated = DateTime.Now,
+                        EmployeeId = loggedInEmployeeId,
+                        LeaveTypeId = id,
+                        NumberOfDays = leaveType.DefaultDays,
+                        Period = DateTime.Now.Year
+                    };
+                    var loggedInLeaveAllocation = _mapper.Map<LeaveAllocation>(loggedInAllocation);
+                    _leaveAllocationRepo.Create(loggedInLeaveAllocation);
+                }
+
+                var allocation = new LeaveAllocationVM
+                {
+                    DateCreated = DateTime.Now,
+                    EmployeeId = emp.Id,
+                    LeaveTypeId = id,
+                    NumberOfDays = leaveType.DefaultDays,
+                    Period = DateTime.Now.Year
+                };
+                var leaveallocation = _mapper.Map<LeaveAllocation>(allocation);
+                _leaveAllocationRepo.Create(leaveallocation);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         /* public ActionResult ListEmployees()
@@ -105,20 +149,20 @@ namespace Employee_Leave_Managent.Controllers
 
              return View(model);
          }*/
-       /* public ActionResult ListEmployees()
-        {
-            var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
-            var currentUser = _userManager.GetUserAsync(User).Result;
+        /* public ActionResult ListEmployees()
+         {
+             var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
+             var currentUser = _userManager.GetUserAsync(User).Result;
 
-            // إضافة الموظف الحالي إلى القائمة إذا لم يتم عرضه بالفعل
-            if (!employees.Contains(currentUser))
-            {
-                employees.Add(currentUser);
-            }
+             // إضافة الموظف الحالي إلى القائمة إذا لم يتم عرضه بالفعل
+             if (!employees.Contains(currentUser))
+             {
+                 employees.Add(currentUser);
+             }
 
-            var model = _mapper.Map<List<EmployeeVM>>(employees);
-            return View(model);
-        }*/
+             var model = _mapper.Map<List<EmployeeVM>>(employees);
+             return View(model);
+         }*/
 
         // GET: LeaveAllocationController/Details/5
         public ActionResult Details(string id)

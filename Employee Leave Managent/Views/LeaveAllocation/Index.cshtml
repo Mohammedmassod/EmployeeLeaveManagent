@@ -32,9 +32,9 @@
             </td>            
             <td>
                 @Html.ActionLink("تخصيص لكل الموظفين","SetLeave", new { id = item.Id }, new {@class = "btn btn-success"})
-                <a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
-                    <i class="fa fa-pencil"></i> تخصيص لموظف معين
-                </a>
+                    @*<a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
+                        <i class="fa fa-pencil"></i> تخصيص لموظف معين
+                    </a>*@
             </td>
 
         </tr>
