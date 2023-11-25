@@ -26,11 +26,14 @@ This system has the following features.
 - The ability for the admin to allocate the leaves for all employees at once
 - The admin can change the amount of leave of the employee
 
-## Packages
+## Applied concepts
 
 - OOP
 - SOLID
 - design Pattern
+
+## Packages
+
 - AutoMapper
 - automapper.extensions.microsoft.dependencyinjection
 - microsoft.aspnetcore.diagnostics.entityframeworkcore
