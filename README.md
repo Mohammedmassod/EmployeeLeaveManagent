@@ -30,6 +30,7 @@ This system has the following features.
 
 - OOP
 - SOLID
+- design Pattern
 - AutoMapper
 - automapper.extensions.microsoft.dependencyinjection
 - microsoft.aspnetcore.diagnostics.entityframeworkcore
