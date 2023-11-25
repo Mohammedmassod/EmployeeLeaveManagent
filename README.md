@@ -13,12 +13,7 @@ Leave Management project is a .NET Core web application. When developing this ap
 
 ## To Configure For Local Use
 
-- Clone Repository To Local Computer
-- Open Project in Visual Studio
-- Edit "DefaultConnection" to point to preferred database
-- Open Package Console Manager and run the command "Update-Database"
-- When completed, Run Website in Visual Studio to seed default Admin User
-- Login as admin user using: Username: admin@localhost.com | Password: Password1234!
+- Login as admin user using: Username: admin@mohammed.com | Password: Admin@123
 
 ## Design Diagram
 
@@ -38,12 +33,6 @@ This system has the following features.
 - The admin can easily find out how many leaves have been applied for
 - The ability for the admin to allocate the leaves for all employees at once
 - The admin can change the amount of leave of the employee
-
-## Sample Videos:
-
-### Admin View
-
-### Employee View
 
 ## Packages
 
