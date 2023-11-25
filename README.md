@@ -15,14 +15,6 @@ Leave Management project is a .NET Core web application. When developing this ap
 
 - Login as admin user using: Username: admin@mohammed.com | Password: Admin@123
 
-## Design Diagram
-
-### Entity–relationship Diagram model
-
-### Database diagram
-
-## Overview
-
 In many companies, Employee Leave Management systems can sometimes be taken into account retrospectively. Some use a paper-based system. Others mark the day in their calendars if they do so at all. This practice grows many issues, especially when asked from the employee’s point of view.
 
 This system has the following features.
@@ -36,6 +28,8 @@ This system has the following features.
 
 ## Packages
 
+- OOP
+- SOLID
 - AutoMapper
 - automapper.extensions.microsoft.dependencyinjection
 - microsoft.aspnetcore.diagnostics.entityframeworkcore
