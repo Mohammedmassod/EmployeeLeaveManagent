@@ -98,11 +98,16 @@ namespace Employee_Leave_Managent.Controllers
             }
             return RedirectToAction(nameof(Index));
         }*/
-        public ActionResult SetLeave(int id)
+        public async Task<ActionResult> SetLeave(int id)
         {
             var leaveType = _leaveRepo.FindById(id);
             var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
-            var loggedInEmployeeId = User.FindFirstValue(ClaimTypes.NameIdentifier); // أو أي طريقة أخرى للحصول على معرف الموظف المسجل الدخول
+
+            // Get the ID of the logged-in employee
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Add the logged-in employee to the list of employees
+            employees.Add(await _userManager.FindByIdAsync(loggedInUserId));
 
             foreach (var emp in employees)
             {
@@ -110,21 +115,6 @@ namespace Employee_Leave_Managent.Controllers
                 {
                     ModelState.AddModelError("", $"تم تخصيص إجازة {leaveType.Name} للموظف {emp.Firstname} {emp.Lastname} مسبقاً.");
                     continue;
-                }
-
-                if (emp.Id == loggedInEmployeeId)
-                {
-                    // تخصيص الإجازة أيضًا للموظف المسجل الدخول
-                    var loggedInAllocation = new LeaveAllocationVM
-                    {
-                        DateCreated = DateTime.Now,
-                        EmployeeId = loggedInEmployeeId,
-                        LeaveTypeId = id,
-                        NumberOfDays = leaveType.DefaultDays,
-                        Period = DateTime.Now.Year
-                    };
-                    var loggedInLeaveAllocation = _mapper.Map<LeaveAllocation>(loggedInAllocation);
-                    _leaveAllocationRepo.Create(loggedInLeaveAllocation);
                 }
 
                 var allocation = new LeaveAllocationVM
@@ -135,6 +125,7 @@ namespace Employee_Leave_Managent.Controllers
                     NumberOfDays = leaveType.DefaultDays,
                     Period = DateTime.Now.Year
                 };
+
                 var leaveallocation = _mapper.Map<LeaveAllocation>(allocation);
                 _leaveAllocationRepo.Create(leaveallocation);
             }
