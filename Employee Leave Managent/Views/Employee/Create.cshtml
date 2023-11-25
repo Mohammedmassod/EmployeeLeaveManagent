@@ -5,35 +5,57 @@
 
 @model Employee_Leave_Managent.Data.Migrations.Employee
 
-<h2>Create Employee</h2>
-
-<form asp-action="Create">
-    <div class="form-group">
-        <label asp-for="Firstname">First Name</label>
-        <input asp-for="Firstname" class="form-control" />
-        <span asp-validation-for="Firstname" class="text-danger"></span>
+<div class="container">
+    <div class="row justify-content-center" style="text-align:center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">إضافة موظف</h2>
+                    <form asp-action="Create" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label asp-for="Firstname">الاسم الأول</label>
+                            <input asp-for="Firstname" class="form-control" required />
+                            <div class="invalid-feedback">
+                                يرجى إدخال الاسم الأول.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Lastname" >الاسم الأخير</label>
+                            <input asp-for="Lastname" class="form-control" required />
+                            <div class="invalid-feedback">
+                                يرجى إدخال الاسم الأخير.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TaxId">الرقم الوظيفي</label>
+                            <input asp-for="TaxId" class="form-control" required />
+                            <div class="invalid-feedback">
+                                يرجى إدخال الرقم الوظيفي.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth">تاريخ الميلاد</label>
+                            <input asp-for="DateOfBirth" class="form-control" required />
+                            <div class="invalid-feedback">
+                                يرجى إدخال تاريخ الميلاد.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateJoined">تاريخ الانضمام</label>
+                            <input asp-for="DateJoined" class="form-control" required />
+                            <div class="invalid-feedback">
+                                يرجى إدخال تاريخ الانضمام.
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" value="Create" class="btn btn-primary">إنشاء</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        <a href="javascript:history.back()" class="btn btn-secondary">رجوع</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Lastname">Last Name</label>
-        <input asp-for="Lastname" class="form-control" />
-        <span asp-validation-for="Lastname" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="TaxId">Tax ID</label>
-        <input asp-for="TaxId" class="form-control" />
-        <span asp-validation-for="TaxId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateOfBirth">Date of Birth</label>
-        <input asp-for="DateOfBirth" class="form-control" />
-        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateJoined">Date Joined</label>
-        <input asp-for="DateJoined" class="form-control" />
-        <span asp-validation-for="DateJoined" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
+</div>

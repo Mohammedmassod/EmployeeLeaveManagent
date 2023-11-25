@@ -9,20 +9,20 @@
 {
     @Html.AntiForgeryToken()
 
-
-    <h1>الرئيسية</h1>
-
+    <div style="text-align:center">
+    <h1>تخصيص الاجازات </h1>
+    </div>
    @* <p>
         <a asp-action="Create">اضافة جديد</a>
     </p>*@
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
+    <table id="tblData" class="table table-bordered" style="text-align:center">
+        <thead >
+            <tr >
+                <th style="text-align:center">
                     انواع الإجازات
                 </th>
-                <th>
+                <th style="text-align:center">
                     الأجراءات
                 </th>
             </tr>
@@ -51,9 +51,7 @@
                         </select>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     </td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id">حذف</a>
-                    </td>
+                   
                 </tr>
             }
         </tbody>

@@ -5,36 +5,50 @@
 
 @model Employee_Leave_Managent.Data.Migrations.Employee
 
-<h2>Edit Employee</h2>
+<div class="container">
+    <div class="row justify-content-center" style="text-align:center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">تعديل الموظف</h2>
 
-<form asp-action="Edit">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label asp-for="Firstname">First Name</label>
-        <input asp-for="Firstname" class="form-control" />
-        <span asp-validation-for="Firstname" class="text-danger"></span>
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Firstname">الاسم الأول</label>
+                            <input asp-for="Firstname" class="form-control" />
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Lastname">الاسم الأخير</label>
+                            <input asp-for="Lastname" class="form-control" />
+                            <span asp-validation-for="Lastname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TaxId">الرقم الوظيفي</label>
+                            <input asp-for="TaxId" class="form-control" />
+                            <span asp-validation-for="TaxId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth">تاريخ الميلاد</label>
+                            <input asp-for="DateOfBirth" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateJoined">تاريخ الانضمام</label>
+                            <input asp-for="DateJoined" class="form-control" />
+                            <span asp-validation-for="DateJoined" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="حفظ" class="btn btn-primary" />
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <a href="javascript:history.back()" class="btn btn-secondary">رجوع</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Lastname">Last Name</label>
-        <input asp-for="Lastname" class="form-control" />
-        <span asp-validation-for="Lastname" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="TaxId">Tax ID</label>
-        <input asp-for="TaxId" class="form-control" />
-        <span asp-validation-for="TaxId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateOfBirth">Date of Birth</label>
-        <input asp-for="DateOfBirth" class="form-control" />
-        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DateJoined">Date Joined</label>
-        <input asp-for="DateJoined" class="form-control" />
-        <span asp-validation-for="DateJoined" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-    </div>
-</form>
+</div>
